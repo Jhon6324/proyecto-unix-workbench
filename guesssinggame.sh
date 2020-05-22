@@ -1,28 +1,27 @@
+clear
 numreal=$(ls | wc -l)
-
-function entrada {
-	read -p "Adivina el número de archivos que hay en el directorio actual: " numero
-}
-
+echo "Adivina el número de archivos que hay en el directorio actual"
+echo "Ingresa un número: "
 function evaluacion {
-	while [[ numero -ne numreal ]]
+	while [[ $numero -ne $numreal ]]
 	do
-		entrada
-		if [[ numero -lt numreal ]]
+		read numero
+		if [[ $numero =~ ^[0-9]+$ ]]
 		then
-			echo "Su estimación es demasiado baja"
-		elif [[ numero -gt numreal ]]
-		then
-			echo "Su estimación es demasiado alta"
+			if [[ $numero -lt $numreal ]]
+			then
+				echo "Su estimación es demasiasdo baja"
+			elif [[ $numero -gt $numreal ]]
+			then
+
+				echo "Su estimación es demasiado alta"
+			else
+				echo "Felicitaciones, has adivinado el número correcto"
+
+			fi
+		else
+			echo "Por favor ingrese un número entero: "
 		fi
 	done
-
-	if [[ numero -eq numreal ]]
-	then
-		echo "Felicitaciones. Has adivinado, el número de archivos que hay en el directorio actual es igual a $numero"
-	fi
 }
-
 evaluacion
-
-
